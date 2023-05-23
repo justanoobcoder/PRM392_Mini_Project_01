@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUpActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                app:srcCompat="@drawable/_88bet" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/horse_race" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/usernameTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:maxLines="1"
+            android:inputType="text"
+            android:hint="Username"
+            android:imeOptions="actionNext"/>
+
+        <EditText
+            android:id="@+id/passwordTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:imeOptions="actionNext"/>
+        <EditText
+            android:id="@+id/confirmTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            android:imeOptions="actionDone"/>
+
+        <android.widget.Button
+            android:id="@+id/btnSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/red"
+            android:textColor="@color/white"
+            android:text="sign up"
+            android:layout_marginBottom="20dp"
+            android:textAllCaps="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="-----Or-----"
+            android:focusable="false"/>
+
+        <android.widget.Button
+            android:id="@+id/btnGoToLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="back to sign in"
+            android:textAllCaps="true" />
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
