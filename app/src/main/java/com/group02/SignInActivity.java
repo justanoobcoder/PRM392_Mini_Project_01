@@ -53,10 +53,12 @@ public class SignInActivity extends AppCompatActivity {
     private View.OnClickListener signIn = v -> {
         username = etUsername.getText().toString().trim();
         password = etPassword.getText().toString();
+        // Start the game after login successfully
         if (IsNotEmpty() && IsSuccessLogin()) {
-            if (toast != null) toast.cancel();
-            toast = Toast.makeText(v.getContext(), "Login success", Toast.LENGTH_SHORT);
-            toast.show();
+            Intent mainIntent = new Intent(this, MainActivity.class);
+            mainIntent.putExtra("username", username);
+            startActivity(mainIntent);
+            finish();
         }
     };
 
