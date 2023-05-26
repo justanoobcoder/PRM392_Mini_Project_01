@@ -8,4 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red">#ef233c</color>
+    <color name="game_background">#44C628</color>
+    <color name="gold">#F2F14F</color>
+    <color name="label">#CF2215</color>
+    <color name="game_title">#E1233A</color>
 </resources>
