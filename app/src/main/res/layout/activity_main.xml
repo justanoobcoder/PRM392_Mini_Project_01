@@ -69,7 +69,8 @@
             android:inputType="number"
             android:textSize="30sp"
             android:textColor="@color/gold"
-            android:layout_marginLeft="5dp"/>
+            android:layout_marginLeft="5dp"
+            android:id="@+id/txtBet"/>
         <ImageView
             android:layout_width="32dp"
             android:layout_height="32dp"
@@ -81,7 +82,8 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/red"
             android:textColor="@color/white"
-            android:text="Bet"/>
+            android:text="Bet"
+            android:id="@+id/btnBet"/>
     </LinearLayout>
 
     <LinearLayout
@@ -104,14 +106,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"/>
+
             <SeekBar
                 android:id="@+id/skbHorse1"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:thumb="@mipmap/ic_horse_foreground"
-                android:thumbOffset="40dp"
+                android:max="300"
+                android:progressBackgroundTint="@android:color/transparent"
                 android:progressTint="@android:color/transparent"
-                android:progressBackgroundTint="@android:color/transparent"/>
+                android:thumb="@mipmap/ic_horse_foreground"
+                android:thumbOffset="40dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -124,14 +128,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"/>
+
             <SeekBar
                 android:id="@+id/skbHorse2"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:thumb="@mipmap/ic_horse_foreground"
-                android:thumbOffset="40dp"
+                android:max="300"
+                android:progressBackgroundTint="@android:color/transparent"
                 android:progressTint="@android:color/transparent"
-                android:progressBackgroundTint="@android:color/transparent"/>
+                android:thumb="@mipmap/ic_horse_foreground"
+                android:thumbOffset="40dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -144,14 +150,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"/>
+
             <SeekBar
                 android:id="@+id/skbHorse3"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:thumb="@mipmap/ic_horse_foreground"
-                android:thumbOffset="40dp"
+                android:max="300"
+                android:progressBackgroundTint="@android:color/transparent"
                 android:progressTint="@android:color/transparent"
-                android:progressBackgroundTint="@android:color/transparent"/>
+                android:thumb="@mipmap/ic_horse_foreground"
+                android:thumbOffset="40dp" />
         </LinearLayout>
         <View
             android:layout_width="0dp"
