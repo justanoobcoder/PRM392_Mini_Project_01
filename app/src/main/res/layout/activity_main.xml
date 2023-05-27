@@ -53,37 +53,66 @@
             android:layout_margin="5dp"
             android:background="@drawable/ic_dollar" />
     </LinearLayout>
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your bet"
+        android:textSize="30sp"
+        android:textColor="@color/label"
+        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:id="@+id/txtBet1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Your bet:"
-            android:textColor="@color/label"
-            android:textSize="30sp"/>
-        <EditText
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:textSize="30sp"
-            android:textColor="@color/gold"
-            android:layout_marginLeft="5dp"
-            android:id="@+id/txtBet"/>
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginTop="5dp"
-            android:layout_gravity="center"
-            android:background="@drawable/ic_dollar" />
-        <android.widget.Button
+            android:layout_weight="1"
+            android:text="Horse 1: 0$"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textAlignment="center"/>
+        <TextView
+            android:id="@+id/txtBet2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/red"
-            android:textColor="@color/white"
-            android:text="Bet"
-            android:id="@+id/btnBet"/>
+            android:layout_weight="1"
+            android:text="Horse 2: 0$"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textAlignment="center"
+            />
+        <TextView
+            android:id="@+id/txtBet3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Horse 3: 0$"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textAlignment="center"
+           />
+<!--        <EditText-->
+<!--            android:layout_width="100dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:inputType="number"-->
+<!--            android:textSize="30sp"-->
+<!--            android:textColor="@color/gold"-->
+<!--            android:layout_marginLeft="5dp"-->
+<!--            android:id="@+id/txtBet"/>-->
+<!--        <ImageView-->
+<!--            android:layout_width="32dp"-->
+<!--            android:layout_height="32dp"-->
+<!--            android:layout_marginTop="5dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:background="@drawable/ic_dollar" />-->
+<!--        <android.widget.Button-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:backgroundTint="@color/red"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:text="Bet"-->
+<!--            android:id="@+id/btnBet"/>-->
     </LinearLayout>
 
     <LinearLayout

@@ -1,13 +1,17 @@
 package com.group02;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,12 +20,13 @@ import java.util.List;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
-    Button btnStart, btnQuit, btnBet;
+    Button btnStart, btnQuit;
     CheckBox ckbHorse1, ckbHorse2, ckbHorse3;
     SeekBar skbHorse1, skbHorse2, skbHorse3;
     TextView txtPoint;
-    EditText txtBet;
-    int tiencuoc;
+    TextView txtBet1;
+    TextView txtBet2;
+    TextView txtBet3;
     int tongtien;
 
     int betHorse1, betHorse2, betHorse3;
@@ -41,8 +46,11 @@ public class MainActivity extends AppCompatActivity {
         skbHorse2 = (SeekBar) findViewById(R.id.skbHorse2);
         skbHorse3 = (SeekBar) findViewById(R.id.skbHorse3);
         txtPoint = (TextView) findViewById(R.id.txtPoint);
-        txtBet = (EditText) findViewById(R.id.txtBet);
-        btnBet = (Button) findViewById(R.id.btnBet);
+//        txtBet = (EditText) findViewById(R.id.txtBet);
+//        btnBet = (Button) findViewById(R.id.btnBet);
+        txtBet1 = (TextView) findViewById(R.id.txtBet1);
+        txtBet2 = (TextView) findViewById(R.id.txtBet2);
+        txtBet3 = (TextView) findViewById(R.id.txtBet3);
         tongtien = Integer.parseInt(txtPoint.getText().toString());
 
         skbHorse1.setMax(1000);
@@ -67,9 +75,7 @@ public class MainActivity extends AppCompatActivity {
                     openDialog("Horse 1 is a winner");
                     tongtien += betHorse1 * 2;
                     txtPoint.setText(tongtien + "");
-                    betHorse1 = 0;
-                    betHorse2 = 0;
-                    betHorse3 = 0;
+                    btnStart.setText("RESTART");
                     return;
                 }
                 if (skbHorse2.getProgress() >= skbHorse2.getMax()) {
@@ -77,9 +83,7 @@ public class MainActivity extends AppCompatActivity {
                     openDialog("Horse 2 is a winner");
                     tongtien += betHorse2 * 2;
                     txtPoint.setText(tongtien + "");
-                    betHorse1 = 0;
-                    betHorse2 = 0;
-                    betHorse3 = 0;
+                    btnStart.setText("RESTART");
                     return;
                 }
                 if (skbHorse3.getProgress() >= skbHorse3.getMax()) {
@@ -87,9 +91,7 @@ public class MainActivity extends AppCompatActivity {
                     openDialog("Horse 3 is a winner");
                     tongtien += betHorse3 * 2;
                     txtPoint.setText(tongtien + "");
-                    betHorse1 = 0;
-                    betHorse2 = 0;
-                    betHorse3 = 0;
+                    btnStart.setText("RESTART");
                     return;
                 }
                 skbHorse1.setProgress(skbHorse1.getProgress() + one);
@@ -107,44 +109,65 @@ public class MainActivity extends AppCompatActivity {
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                skbHorse1.setProgress(0);
-                skbHorse2.setProgress(0);
-                skbHorse3.setProgress(0);
-                countDownTimer.start();
-                ckbHorse1.setChecked(false);
-                ckbHorse2.setChecked(false);
-                ckbHorse3.setChecked(false);
-                txtBet.setText("");
-            }
-        });
-
-        btnBet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (txtBet.getText().length() == 0) {
-                    txtBet.setError("The bet number can not be empty!");
-                }else if (Integer.parseInt(txtBet.getText().toString()) > tongtien) {
-                    txtBet.setError("The bet number can not be bigger than total point!");
-                }else{
-                    if (ckbHorse1.isChecked()) {
-                        betHorse1 = Integer.parseInt(txtBet.getText().toString());
-                        tongtien -= betHorse1;
-                        txtPoint.setText(tongtien + "");
-                    } else if (ckbHorse2.isChecked()) {
-                        betHorse2 = Integer.parseInt(txtBet.getText().toString());
-                        tongtien -= betHorse2;
-                        txtPoint.setText(tongtien + "");
-                    } else if (ckbHorse3.isChecked()) {
-                        betHorse3 = Integer.parseInt(txtBet.getText().toString());
-                        tongtien -= betHorse3;
-                        txtPoint.setText(tongtien + "");
-                    }else{
-                        txtBet.setError("Please choose horse to bet!");
+                Button tmp = (Button) v;
+                if (tmp.getText().toString().equalsIgnoreCase("start")) {
+                    if (betHorse1 == 0 && betHorse2 == 0 && betHorse3 == 0) {
+                        openDialog("Please make your bet before start");
+                    }
+                    else {
+                        skbHorse1.setProgress(0);
+                        skbHorse2.setProgress(0);
+                        skbHorse3.setProgress(0);
+                        countDownTimer.start();
                     }
                 }
-
+                else if (tmp.getText().toString().equalsIgnoreCase("restart")) {
+                    skbHorse1.setProgress(0);
+                    skbHorse2.setProgress(0);
+                    skbHorse3.setProgress(0);
+                    betHorse1 = 0;
+                    betHorse3 = 0;
+                    betHorse2 = 0;
+                    txtBet1.setText("Horse 1: " + betHorse1 + "$");
+                    txtBet2.setText("Horse 2: " + betHorse2 + "$");
+                    txtBet3.setText("Horse 3: " + betHorse3 + "$");
+                    ckbHorse1.setChecked(false);
+                    ckbHorse2.setChecked(false);
+                    ckbHorse3.setChecked(false);
+                    tmp.setText("START");
+                }
             }
         });
+        ckbHorse1.setOnClickListener(cbOnclick);
+        ckbHorse2.setOnClickListener(cbOnclick);
+        ckbHorse3.setOnClickListener(cbOnclick);
+//        btnBet.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (txtBet.getText().length() == 0) {
+//                    txtBet.setError("The bet number can not be empty!");
+//                }else if (Integer.parseInt(txtBet.getText().toString()) > tongtien) {
+//                    txtBet.setError("The bet number can not be bigger than total point!");
+//                }else{
+//                    if (ckbHorse1.isChecked()) {
+//                        betHorse1 = Integer.parseInt(txtBet.getText().toString());
+//                        tongtien -= betHorse1;
+//                        txtPoint.setText(tongtien + "");
+//                    } else if (ckbHorse2.isChecked()) {
+//                        betHorse2 = Integer.parseInt(txtBet.getText().toString());
+//                        tongtien -= betHorse2;
+//                        txtPoint.setText(tongtien + "");
+//                    } else if (ckbHorse3.isChecked()) {
+//                        betHorse3 = Integer.parseInt(txtBet.getText().toString());
+//                        tongtien -= betHorse3;
+//                        txtPoint.setText(tongtien + "");
+//                    }else{
+//                        txtBet.setError("Please choose horse to bet!");
+//                    }
+//                }
+//
+//            }
+//        });
 
         btnQuit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,5 +182,75 @@ public class MainActivity extends AppCompatActivity {
         messageDialog.setResult(resultRace);
         messageDialog.show(getSupportFragmentManager(), "example");
     }
+    private View.OnClickListener cbOnclick = v -> {
+        CheckBox t = (CheckBox) v;
+        if (t.isChecked()) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            if (t.getId() == R.id.ckbHorse1)  builder.setTitle("Bet for hourse 1, your total: " + tongtien + "$");
+            if (t.getId() == R.id.ckbHorse2)  builder.setTitle("Bet for hourse 2, your total: " + tongtien + "$");
+            if (t.getId() == R.id.ckbHorse3)  builder.setTitle("Bet for hourse 3, your total: " + tongtien + "$");
+            final EditText input = new EditText(this);
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            builder.setView(input);
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    //betHorse1 = Integer.parseInt(input.getText().toString());
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    t.setChecked(false);
+                    dialog.cancel();
+                }
+            });
+            final AlertDialog dialog = builder.create();
+            dialog.show();
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        int amount = Integer.parseInt(input.getText().toString());
+                        if (amount == 0) {
+                            input.setError("More than zero please -.-");
+                        }
+                        else if (amount > tongtien) {
+                            input.setError("Invalid bet amount");
+                        } else {
+                            tongtien -= amount;
+                            txtPoint.setText(tongtien + "");
+                            if (t.getId() == R.id.ckbHorse1) betHorse1 = amount;
+                            if (t.getId() == R.id.ckbHorse2) betHorse2 = amount;
+                            if (t.getId() == R.id.ckbHorse3) betHorse3 = amount;
+                            txtBet1.setText("Horse 1: " + betHorse1 + "$");
+                            txtBet2.setText("Horse 2: " + betHorse2 + "$");
+                            txtBet3.setText("Horse 3: " + betHorse3 + "$");
+                            dialog.dismiss();
+                        }
+                    } catch (NumberFormatException ex) {
+                        input.setError("Please input number");
+                    }
+                }
+            });
+        }
+        else {
+            if (t.getId() == R.id.ckbHorse1)  {
+                tongtien += betHorse1;
+                betHorse1 = 0;
+            }
+            if (t.getId() == R.id.ckbHorse2)  {
+                tongtien += betHorse2;
+                betHorse2 = 0;
+            } if (t.getId() == R.id.ckbHorse3)  {
+                tongtien += betHorse3;
+                betHorse3 = 0;
+            }
+            txtPoint.setText(tongtien + "");
+            txtBet1.setText("Horse 1: " + betHorse1 + "$");
+            txtBet2.setText("Horse 2: " + betHorse2 + "$");
+            txtBet3.setText("Horse 3: " + betHorse3 + "$");
+        }
 
+    };
 }
