@@ -53,25 +53,19 @@ public class MainActivity extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 int number = 100;
                 Random random = new Random();
-//                int one= random.nextInt(number);
-//                int two = random.nextInt(number);
-//                int three = random.nextInt(number);
                 int one = 0;
                 int two = 0;
                 int three = 0;
                 do {
-                    one = random.nextInt(100);
-                    two = random.nextInt(100);
-                    three = random.nextInt(100);
+                    one = random.nextInt(number);
+                    two = random.nextInt(number);
+                    three = random.nextInt(number);
                 } while (one == two || two == three || three == one);
 
                 if (skbHorse1.getProgress() >= skbHorse1.getMax()) {
-                    indexWiner = 0;
-
                     this.cancel();
                     openDialog("Horse 1 is a winner");
                     tongtien += betHorse1 * 2;
-                    System.out.println(tongtien + " " + betHorse1 + " Ngua 1");
                     txtPoint.setText(tongtien + "");
                     betHorse1 = 0;
                     betHorse2 = 0;
@@ -79,11 +73,9 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 if (skbHorse2.getProgress() >= skbHorse2.getMax()) {
-                    indexWiner = 1;
                     this.cancel();
                     openDialog("Horse 2 is a winner");
                     tongtien += betHorse2 * 2;
-                    System.out.println(tongtien + " " + betHorse2 + " Ngua 2");
                     txtPoint.setText(tongtien + "");
                     betHorse1 = 0;
                     betHorse2 = 0;
@@ -91,11 +83,9 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 if (skbHorse3.getProgress() >= skbHorse3.getMax()) {
-                    indexWiner = 2;
                     this.cancel();
                     openDialog("Horse 3 is a winner");
                     tongtien += betHorse3 * 2;
-                    System.out.println(tongtien + " " + betHorse3 + " Ngua 3");
                     txtPoint.setText(tongtien + "");
                     betHorse1 = 0;
                     betHorse2 = 0;
@@ -120,39 +110,39 @@ public class MainActivity extends AppCompatActivity {
                 skbHorse1.setProgress(0);
                 skbHorse2.setProgress(0);
                 skbHorse3.setProgress(0);
-                System.out.println(betHorse1 + " " + betHorse2 + " " + betHorse3);
                 countDownTimer.start();
+                ckbHorse1.setChecked(false);
+                ckbHorse2.setChecked(false);
+                ckbHorse3.setChecked(false);
+                txtBet.setText("");
             }
         });
 
         btnBet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ckbHorse1.isChecked()) {
-                    if (Integer.parseInt(txtBet.getText().toString()) > tongtien) {
-                        txtBet.setError("The bet number can not be bigger than total point!");
-                    } else {
+                if (txtBet.getText().length() == 0) {
+                    txtBet.setError("The bet number can not be empty!");
+                }else if (Integer.parseInt(txtBet.getText().toString()) > tongtien) {
+                    txtBet.setError("The bet number can not be bigger than total point!");
+                }else{
+                    if (ckbHorse1.isChecked()) {
                         betHorse1 = Integer.parseInt(txtBet.getText().toString());
                         tongtien -= betHorse1;
                         txtPoint.setText(tongtien + "");
-                    }
-                } else if (ckbHorse2.isChecked()) {
-                    if (Integer.parseInt(txtBet.getText().toString()) > tongtien) {
-                        txtBet.setError("The bet number can not be bigger than total point!");
-                    } else {
+                    } else if (ckbHorse2.isChecked()) {
                         betHorse2 = Integer.parseInt(txtBet.getText().toString());
                         tongtien -= betHorse2;
                         txtPoint.setText(tongtien + "");
-                    }
-                } else if (ckbHorse3.isChecked()) {
-                    if (Integer.parseInt(txtBet.getText().toString()) > tongtien) {
-                        txtBet.setError("The bet number can not be bigger than total point!");
-                    } else {
+                    } else if (ckbHorse3.isChecked()) {
                         betHorse3 = Integer.parseInt(txtBet.getText().toString());
                         tongtien -= betHorse3;
                         txtPoint.setText(tongtien + "");
+                    }else{
+                        txtBet.setError("Please choose horse to bet!");
                     }
                 }
+
             }
         });
 
