@@ -2,6 +2,7 @@ package com.group02;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.InputType;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     TextView txtBet1;
     TextView txtBet2;
     TextView txtBet3;
+
     int tongtien;
 
     int betHorse1, betHorse2, betHorse3;
@@ -53,12 +55,20 @@ public class MainActivity extends AppCompatActivity {
         txtBet3 = (TextView) findViewById(R.id.txtBet3);
         tongtien = Integer.parseInt(txtPoint.getText().toString());
 
+        final MediaPlayer click = MediaPlayer.create(this, R.raw.click);
+        final MediaPlayer sui = MediaPlayer.create(this, R.raw.sui);
+        final MediaPlayer quit = MediaPlayer.create(this, R.raw.quit);
+        final MediaPlayer background = MediaPlayer.create(this, R.raw.background_music);
+
+        background.start();
+
         skbHorse1.setMax(1000);
         skbHorse2.setMax(1000);
         skbHorse3.setMax(1000);
         CountDownTimer countDownTimer = new CountDownTimer(60000, 300) {
             @Override
             public void onTick(long millisUntilFinished) {
+
                 int number = 100;
                 Random random = new Random();
                 int one = 0;
@@ -72,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (skbHorse1.getProgress() >= skbHorse1.getMax()) {
                     this.cancel();
+                    sui.start();
                     openDialog("Horse 1 is a winner");
                     tongtien += betHorse1 * 2;
                     txtPoint.setText(tongtien + "");
@@ -80,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if (skbHorse2.getProgress() >= skbHorse2.getMax()) {
                     this.cancel();
+                    sui.start();
                     openDialog("Horse 2 is a winner");
                     tongtien += betHorse2 * 2;
                     txtPoint.setText(tongtien + "");
@@ -88,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if (skbHorse3.getProgress() >= skbHorse3.getMax()) {
                     this.cancel();
+                    sui.start();
                     openDialog("Horse 3 is a winner");
                     tongtien += betHorse3 * 2;
                     txtPoint.setText(tongtien + "");
@@ -109,6 +122,9 @@ public class MainActivity extends AppCompatActivity {
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                click.start();
+
                 Button tmp = (Button) v;
                 if (tmp.getText().toString().equalsIgnoreCase("start")) {
                     if (betHorse1 == 0 && betHorse2 == 0 && betHorse3 == 0) {
@@ -172,7 +188,29 @@ public class MainActivity extends AppCompatActivity {
         btnQuit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                android.os.Process.killProcess(android.os.Process.myPid());
+                quit.start();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("Are you sure want to quit?");
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                final AlertDialog dialog = builder.create();
+                dialog.show();
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        android.os.Process.killProcess(android.os.Process.myPid());
+                    }
+                });
             }
         });
     }
@@ -183,6 +221,11 @@ public class MainActivity extends AppCompatActivity {
         messageDialog.show(getSupportFragmentManager(), "example");
     }
     private View.OnClickListener cbOnclick = v -> {
+
+        MediaPlayer click = MediaPlayer.create(MainActivity.this, R.raw.click);
+
+        click.start();
+
         CheckBox t = (CheckBox) v;
         if (t.isChecked()) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
