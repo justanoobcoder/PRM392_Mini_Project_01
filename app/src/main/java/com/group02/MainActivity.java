@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         final MediaPlayer background = MediaPlayer.create(this, R.raw.background_music);
 
         background.start();
+        background.setLooping(true);
 
         skbHorse1.setMax(1000);
         skbHorse2.setMax(1000);
