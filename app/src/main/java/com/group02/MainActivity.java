@@ -54,7 +54,9 @@ public class MainActivity extends AppCompatActivity {
         txtBet2 = (TextView) findViewById(R.id.txtBet2);
         txtBet3 = (TextView) findViewById(R.id.txtBet3);
         tongtien = Integer.parseInt(txtPoint.getText().toString());
-
+        skbHorse1.setEnabled(false);
+        skbHorse2.setEnabled(false);
+        skbHorse3.setEnabled(false);
         final MediaPlayer click = MediaPlayer.create(this, R.raw.click);
         final MediaPlayer sui = MediaPlayer.create(this, R.raw.sui);
         final MediaPlayer quit = MediaPlayer.create(this, R.raw.quit);
@@ -135,9 +137,22 @@ public class MainActivity extends AppCompatActivity {
                         skbHorse2.setProgress(0);
                         skbHorse3.setProgress(0);
                         countDownTimer.start();
+                        ckbHorse1.setEnabled(false);
+                        ckbHorse2.setEnabled(false);
+                        ckbHorse3.setEnabled(false);
+                        tmp.setText("PAUSE");
                     }
                 }
+                else if (tmp.getText().toString().equalsIgnoreCase("pause")) {
+                    countDownTimer.cancel();
+                    tmp.setText("CONTINUE");
+                }
+                else if (tmp.getText().toString().equalsIgnoreCase("continue")) {
+                    countDownTimer.start();
+                    tmp.setText("PAUSE");
+                }
                 else if (tmp.getText().toString().equalsIgnoreCase("restart")) {
+
                     skbHorse1.setProgress(0);
                     skbHorse2.setProgress(0);
                     skbHorse3.setProgress(0);
@@ -147,6 +162,9 @@ public class MainActivity extends AppCompatActivity {
                     txtBet1.setText("Horse 1: " + betHorse1 + "$");
                     txtBet2.setText("Horse 2: " + betHorse2 + "$");
                     txtBet3.setText("Horse 3: " + betHorse3 + "$");
+                    ckbHorse1.setEnabled(true);
+                    ckbHorse2.setEnabled(true);
+                    ckbHorse3.setEnabled(true);
                     ckbHorse1.setChecked(false);
                     ckbHorse2.setChecked(false);
                     ckbHorse3.setChecked(false);
