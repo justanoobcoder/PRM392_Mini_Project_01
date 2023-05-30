@@ -12,12 +12,9 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -48,8 +45,6 @@ public class MainActivity extends AppCompatActivity {
         skbHorse2 = (SeekBar) findViewById(R.id.skbHorse2);
         skbHorse3 = (SeekBar) findViewById(R.id.skbHorse3);
         txtPoint = (TextView) findViewById(R.id.txtPoint);
-//        txtBet = (EditText) findViewById(R.id.txtBet);
-//        btnBet = (Button) findViewById(R.id.btnBet);
         txtBet1 = (TextView) findViewById(R.id.txtBet1);
         txtBet2 = (TextView) findViewById(R.id.txtBet2);
         txtBet3 = (TextView) findViewById(R.id.txtBet3);
@@ -176,33 +171,6 @@ public class MainActivity extends AppCompatActivity {
         ckbHorse1.setOnClickListener(cbOnclick);
         ckbHorse2.setOnClickListener(cbOnclick);
         ckbHorse3.setOnClickListener(cbOnclick);
-//        btnBet.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (txtBet.getText().length() == 0) {
-//                    txtBet.setError("The bet number can not be empty!");
-//                }else if (Integer.parseInt(txtBet.getText().toString()) > tongtien) {
-//                    txtBet.setError("The bet number can not be bigger than total point!");
-//                }else{
-//                    if (ckbHorse1.isChecked()) {
-//                        betHorse1 = Integer.parseInt(txtBet.getText().toString());
-//                        tongtien -= betHorse1;
-//                        txtPoint.setText(tongtien + "");
-//                    } else if (ckbHorse2.isChecked()) {
-//                        betHorse2 = Integer.parseInt(txtBet.getText().toString());
-//                        tongtien -= betHorse2;
-//                        txtPoint.setText(tongtien + "");
-//                    } else if (ckbHorse3.isChecked()) {
-//                        betHorse3 = Integer.parseInt(txtBet.getText().toString());
-//                        tongtien -= betHorse3;
-//                        txtPoint.setText(tongtien + "");
-//                    }else{
-//                        txtBet.setError("Please choose horse to bet!");
-//                    }
-//                }
-//
-//            }
-//        });
 
         btnQuit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -248,9 +216,9 @@ public class MainActivity extends AppCompatActivity {
         CheckBox t = (CheckBox) v;
         if (t.isChecked()) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            if (t.getId() == R.id.ckbHorse1)  builder.setTitle("Bet for hourse 1, your total: " + tongtien + "$");
-            if (t.getId() == R.id.ckbHorse2)  builder.setTitle("Bet for hourse 2, your total: " + tongtien + "$");
-            if (t.getId() == R.id.ckbHorse3)  builder.setTitle("Bet for hourse 3, your total: " + tongtien + "$");
+            if (t.getId() == R.id.ckbHorse1)  builder.setTitle("Bet for horse 1, your total: " + tongtien + "$");
+            if (t.getId() == R.id.ckbHorse2)  builder.setTitle("Bet for horse 2, your total: " + tongtien + "$");
+            if (t.getId() == R.id.ckbHorse3)  builder.setTitle("Bet for horse 3, your total: " + tongtien + "$");
             final EditText input = new EditText(this);
             input.setInputType(InputType.TYPE_CLASS_NUMBER);
             builder.setView(input);
